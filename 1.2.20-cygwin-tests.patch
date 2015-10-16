@@ -1,0 +1,60 @@
+--- origsrc/xmlsec1-1.2.20/Makefile.am	2014-05-27 13:29:00.000000000 -0500
++++ src/xmlsec1-1.2.20/Makefile.am	2015-10-16 15:06:46.415641100 -0500
+@@ -68,6 +68,7 @@ else
+ PRECHECK_COMMANDS= \
+ 	for i in $(XMLSEC_CRYPTO_LIST) ; do \
+ 	    export LD_LIBRARY_PATH="$(ABS_BUILDDIR)/src/$$i/.libs:$$LD_LIBRARY_PATH" ; \
++	    export PATH="$(ABS_BUILDDIR)/src/$$i/.libs:$$PATH" ; \
+ 	done && \
+ 	cd $(ABS_SRCDIR) \
+ 	$(NULL)	
+--- origsrc/xmlsec1-1.2.20/tests/testrun.sh	2014-05-27 13:29:01.000000000 -0500
++++ src/xmlsec1-1.2.20/tests/testrun.sh	2015-10-16 15:06:06.218036600 -0500
+@@ -13,11 +13,6 @@ xmlsec_app="$4"
+ file_format="$5"
+ timestamp=`date +%Y%m%d_%H%M%S`
+ 
+-if [ "z$OS_ARCH" = "zCygwin" ] ; then
+-    topfolder=`cygpath -wa "$topfolder"`
+-    xmlsec_app=`cygpath -a "$xmlsec_app"`
+-fi
+-
+ #
+ # Prepare folders
+ #
+@@ -25,13 +20,8 @@ if [ "z$TMPFOLDER" = "z" ] ; then
+     TMPFOLDER=/tmp
+ fi
+ testname=`basename $testfile`
+-if [ "z$OS_ARCH" = "zCygwin" ] ; then
+-    tmpfile=`cygpath -wa $TMPFOLDER/$testname.$timestamp-$$.tmp`
+-    logfile=`cygpath -wa $TMPFOLDER/$testname.$timestamp-$$.log`
+-else
+-    tmpfile=$TMPFOLDER/$testname.$timestamp-$$.tmp
+-    logfile=$TMPFOLDER/$testname.$timestamp-$$.log
+-fi
++tmpfile=$TMPFOLDER/$testname.$timestamp-$$.tmp
++logfile=$TMPFOLDER/$testname.$timestamp-$$.log
+ nssdbfolder=$topfolder/nssdb
+ 
+ #
+@@ -79,9 +69,8 @@ fi
+ # in the pkcs12 file to ensure it is loaded correctly to be used
+ # with SHA2 algorithms. Worse, the CSP is different for XP and older 
+ # versions
+-if test "z$OS_ARCH" = "zCygwin" || test "z$OS_ARCH" = "zMsys" ; then
++if test "z$OS_ARCH" = "zMsys" ; then
+     # Samples:
+-    #   Cygwin	: CYGWIN_NT-5.1
+     #   Msys	: MINGW32_NT-5.1
+     if expr "$OS_KERNEL" : '.*_NT-5\.1' > /dev/null; then
+         priv_key_suffix="-winxp"
+@@ -100,7 +89,7 @@ if [ -n "$PERF_TEST" ] ; then
+     xmlsec_params="$xmlsec_params --repeat $PERF_TEST"
+ fi
+ 
+-if test "z$OS_ARCH" = "zCygwin" || test "z$OS_ARCH" = "zMsys" ; then
++if test "z$OS_ARCH" = "zMsys" ; then
+     diff_param=-uw
+ else
+     diff_param=-u

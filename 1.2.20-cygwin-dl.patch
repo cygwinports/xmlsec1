@@ -1,0 +1,14 @@
+--- origsrc/xmlsec1-1.2.20/src/dl.c	2014-05-27 13:29:01.000000000 -0500
++++ src/xmlsec1-1.2.20/src/dl.c	2015-10-16 14:50:08.562429800 -0500
+@@ -285,7 +285,11 @@ xmlSecCryptoDLLibraryDuplicate(xmlSecCry
+ 
+ static xmlChar*
+ xmlSecCryptoDLLibraryConstructFilename(const xmlChar* name) {
++#ifdef __CYGWIN__
++    static xmlChar tmpl[] = "cyg%s-%s-1";
++#else
+     static xmlChar tmpl[] = "lib%s-%s";
++#endif
+     xmlChar* res;
+     int len;
+ 

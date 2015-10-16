@@ -1,0 +1,72 @@
+NAME="xmlsec1"
+VERSION=1.2.20
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="XML Security library"
+DESCRIPTION="XML Security Library is a C library based on LibXML2. The library
+supports major XML security standards."
+HOMEPAGE="http://www.aleksey.com/xmlsec/"
+SRC_URI="http://www.aleksey.com/xmlsec/download/xmlsec1-${VERSION}.tar.gz"
+PATCH_URI="
+	1.2.20-cygwin-configure.patch
+	1.2.20-cygwin-dl.patch
+	1.2.20-cygwin-tests.patch
+"
+
+PKG_NAMES="xmlsec1 libxmlsec1_1 libxmlsec1-devel libxmlsec1-doc
+	libxmlsec1-gcrypt1 libxmlsec1-gcrypt-devel
+	libxmlsec1-gnutls1 libxmlsec1-gnutls-devel
+	libxmlsec1-nss1 libxmlsec1-nss-devel
+	libxmlsec1-openssl1 libxmlsec1-openssl-devel"
+xmlsec1_REQUIRES="libxmlsec1-openssl1" # default provider
+xmlsec1_CONTENTS="usr/bin/xmlsec1.exe usr/share/man/man1/xmlsec1.1*"
+libxmlsec1_1_SUMMARY="${SUMMARY} (core)"
+libxmlsec1_1_CONTENTS="usr/bin/cygxmlsec1-1.dll usr/share/doc/xmlsec1/[[:upper:]]*"
+libxmlsec1_devel_SUMMARY=${libxmlsec1_1_SUMMARY}
+libxmlsec1_devel_CONTENTS="
+	usr/bin/xmlsec1-config
+	usr/include/xmlsec1/xmlsec/*.h
+	usr/include/xmlsec1/xmlsec/private/
+	usr/lib/libxmlsec1.dll.a
+	usr/lib/pkgconfig/xmlsec1.pc
+	usr/lib/xmlsec1Conf.sh
+	usr/share/aclocal/xmlsec1.m4
+	usr/share/man/man1/xmlsec1-config.1*
+"
+libxmlsec1_gcrypt1_SUMMARY="${SUMMARY} (Gcrypt backend)"
+libxmlsec1_gcrypt1_CONTENTS="usr/bin/cygxmlsec1-gcrypt-1.dll"
+libxmlsec1_gcrypt_devel_SUMMARY=${libxmlsec1_gcrypt1_SUMMARY}
+libxmlsec1_gcrypt_devel_CONTENTS="
+	usr/include/xmlsec1/xmlsec/gcrypt/
+	usr/lib/libxmlsec1-gcrypt.dll.a
+	usr/lib/pkgconfig/xmlsec1-gcrypt.pc
+"
+libxmlsec1_gnutls1_SUMMARY="${SUMMARY} (GnuTLS backend)"
+libxmlsec1_gnutls1_CONTENTS="usr/bin/cygxmlsec1-gnutls-1.dll"
+libxmlsec1_gnutls_devel_SUMMARY=${libxmlsec1_gnutls1_SUMMARY}
+libxmlsec1_gnutls_devel_CONTENTS="
+	usr/include/xmlsec1/xmlsec/gnutls/
+	usr/lib/libxmlsec1-gnutls.dll.a
+	usr/lib/pkgconfig/xmlsec1-gnutls.pc
+"
+libxmlsec1_nss1_SUMMARY="${SUMMARY} (NSS backend)"
+libxmlsec1_nss1_CONTENTS="usr/bin/cygxmlsec1-nss-1.dll"
+libxmlsec1_nss_devel_SUMMARY=${libxmlsec1_nss1_SUMMARY}
+libxmlsec1_nss_devel_CONTENTS="
+	usr/include/xmlsec1/xmlsec/nss/
+	usr/lib/libxmlsec1-nss.dll.a
+	usr/lib/pkgconfig/xmlsec1-nss.pc
+"
+libxmlsec1_openssl1_SUMMARY="${SUMMARY} (OpenSSL backend)"
+libxmlsec1_openssl1_CONTENTS="usr/bin/cygxmlsec1-openssl-1.dll"
+libxmlsec1_openssl_devel_SUMMARY=${libxmlsec1_openssl1_SUMMARY}
+libxmlsec1_openssl_devel_CONTENTS="
+	usr/include/xmlsec1/xmlsec/openssl/
+	usr/lib/libxmlsec1-openssl.dll.a
+	usr/lib/pkgconfig/xmlsec1-openssl.pc
+"
+libxmlsec1_doc_CONTENTS="
+	usr/share/doc/xmlsec1/*.html
+	usr/share/doc/xmlsec1/api/
+	usr/share/doc/xmlsec1/images/
+"

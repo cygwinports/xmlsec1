@@ -1,0 +1,10 @@
+--- origsrc/xmlsec1-1.2.20/configure.in	2014-05-27 13:29:00.000000000 -0500
++++ src/xmlsec1-1.2.20/configure.in	2015-10-16 14:55:31.219902100 -0500
+@@ -117,6 +117,7 @@ case "${host}" in
+  *-*-cygwin*)
+ 	XMLSEC_EXTRA_LDFLAGS="-no-undefined"
+ 	XMLSEC_CRYPTO_EXTRA_LDFLAGS="-no-undefined"
++	XMLSEC_SHLIBSFX=".dll.a"
+ 	;;
+  *-*-darwin*)
+         XMLSEC_SHLIBSFX=".dylib"
