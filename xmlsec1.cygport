@@ -1,5 +1,5 @@
 NAME="xmlsec1"
-VERSION=1.2.20
+VERSION=1.2.22
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="XML Security library"
@@ -67,6 +67,7 @@ libxmlsec1_openssl_devel_CONTENTS="
 "
 libxmlsec1_doc_CONTENTS="
 	usr/share/doc/xmlsec1/*.html
+	usr/share/doc/xmlsec1/favicon.ico
 	usr/share/doc/xmlsec1/api/
 	usr/share/doc/xmlsec1/images/
 "
