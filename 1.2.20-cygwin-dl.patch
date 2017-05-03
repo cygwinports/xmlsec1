@@ -5,10 +5,10 @@
  static xmlChar*
  xmlSecCryptoDLLibraryConstructFilename(const xmlChar* name) {
 +#ifdef __CYGWIN__
-+    static xmlChar tmpl[] = "cyg%s-%s-1";
++    static char tmpl[] = "cyg%s-%s-1";
 +#else
-     static xmlChar tmpl[] = "lib%s-%s";
+     static char tmpl[] = "lib%s-%s";
 +#endif
      xmlChar* res;
      int len;
- 
+     int ret;
